@@ -1,12 +1,8 @@
 function isEqual(obj1, obj2) {
   if (arguments.length === 0)
-    throw new TypeError(
-      'isEqual requires at least 2 argument, but only 0 were passed'
-    );
+    throw new TypeError('isEqual requires at least 2 argument, but only 0 were passed');
   if (arguments.length === 1)
-    throw new TypeError(
-      'isEqual requires at least 2 argument, but only 1 were passed'
-    );
+    throw new TypeError('isEqual requires at least 2 argument, but only 1 were passed');
 
   // null 값 비교
   if (obj1 === null && obj2 === null) return true;
@@ -24,7 +20,9 @@ function isEqual(obj1, obj2) {
     // 객체 사이즈 체크
     if (Object.keys(obj1).length !== Object.keys(obj2).length) return false;
 
-    // 키 돌며 값이 같은지 체크
+    // 키를 돌며 값이 객체일 경우, 재귀호출
+    // 값이 서로 다를 경우 false
+    // for문을 모두 통과하면 true
     for (const key of Object.keys(obj1)) {
       if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object')
         return isEqual(obj1[key], obj2[key]);
